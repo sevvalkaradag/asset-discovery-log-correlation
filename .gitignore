@@ -1,0 +1,8 @@
+# Sanal ortam ve PyCharm klasörleri
+.venv/
+.idea/
+__pycache__/
+
+# Yerel veritabanı dosyası (Kişisel IP/MAC verileri internete açılmasın, db_kurulum.py zaten bunu sıfırdan oluşturuyor)
+*.sqlite
+*.sqlite3
