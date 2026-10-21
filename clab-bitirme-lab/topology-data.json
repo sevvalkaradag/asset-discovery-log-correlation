@@ -1,0 +1,255 @@
+{
+  "name": "bitirme-lab",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-ede5b6949460",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "3fff:172:20:20::/64",
+        "ipv6-gw": "3fff:172:20:20::1",
+        "external-access": true,
+        "ipam": {
+          "provider": "containerlab"
+        }
+      }
+    }
+  },
+  "ssh-pub-keys": [],
+  "nodes": {
+    "log-server": {
+      "index": "0",
+      "shortname": "log-server",
+      "longname": "clab-bitirme-lab-log-server",
+      "fqdn": "log-server.bitirme-lab.io",
+      "group": "",
+      "labdir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/log-server",
+      "kind": "linux",
+      "image": "alpine:latest",
+      "mgmt-net": "clab",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "master",
+        "clab-git-hash": "e8830e9",
+        "clab-mgmt-net-bridge": "br-ede5b6949460",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/log-server",
+        "clab-node-longname": "clab-bitirme-lab-log-server",
+        "clab-node-name": "log-server",
+        "clab-node-type": "",
+        "clab-owner": "sevval",
+        "clab-topo-file": "/home/sevval/Desktop/bitirme projesi/src/topoloji.yaml",
+        "containerlab": "bitirme-lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "pc1": {
+      "index": "1",
+      "shortname": "pc1",
+      "longname": "clab-bitirme-lab-pc1",
+      "fqdn": "pc1.bitirme-lab.io",
+      "group": "",
+      "labdir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/pc1",
+      "kind": "linux",
+      "image": "alpine:latest",
+      "mgmt-net": "clab",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "master",
+        "clab-git-hash": "e8830e9",
+        "clab-mgmt-net-bridge": "br-ede5b6949460",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/pc1",
+        "clab-node-longname": "clab-bitirme-lab-pc1",
+        "clab-node-name": "pc1",
+        "clab-node-type": "",
+        "clab-owner": "sevval",
+        "clab-topo-file": "/home/sevval/Desktop/bitirme projesi/src/topoloji.yaml",
+        "containerlab": "bitirme-lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "pc2": {
+      "index": "2",
+      "shortname": "pc2",
+      "longname": "clab-bitirme-lab-pc2",
+      "fqdn": "pc2.bitirme-lab.io",
+      "group": "",
+      "labdir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/pc2",
+      "kind": "linux",
+      "image": "alpine:latest",
+      "mgmt-net": "clab",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "master",
+        "clab-git-hash": "e8830e9",
+        "clab-mgmt-net-bridge": "br-ede5b6949460",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/pc2",
+        "clab-node-longname": "clab-bitirme-lab-pc2",
+        "clab-node-name": "pc2",
+        "clab-node-type": "",
+        "clab-owner": "sevval",
+        "clab-topo-file": "/home/sevval/Desktop/bitirme projesi/src/topoloji.yaml",
+        "containerlab": "bitirme-lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "pc3": {
+      "index": "3",
+      "shortname": "pc3",
+      "longname": "clab-bitirme-lab-pc3",
+      "fqdn": "pc3.bitirme-lab.io",
+      "group": "",
+      "labdir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/pc3",
+      "kind": "linux",
+      "image": "alpine:latest",
+      "mgmt-net": "clab",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "master",
+        "clab-git-hash": "e8830e9",
+        "clab-mgmt-net-bridge": "br-ede5b6949460",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/pc3",
+        "clab-node-longname": "clab-bitirme-lab-pc3",
+        "clab-node-name": "pc3",
+        "clab-node-type": "",
+        "clab-owner": "sevval",
+        "clab-topo-file": "/home/sevval/Desktop/bitirme projesi/src/topoloji.yaml",
+        "containerlab": "bitirme-lab"
+      },
+      "port-bindings": [
+      ]
+    },
+    "switch1": {
+      "index": "4",
+      "shortname": "switch1",
+      "longname": "clab-bitirme-lab-switch1",
+      "fqdn": "switch1.bitirme-lab.io",
+      "group": "",
+      "labdir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/switch1",
+      "kind": "bridge",
+      "image": "",
+      "mgmt-net": "clab",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "",
+      "mgmt-ipv4-prefix-length": 0,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "master",
+        "clab-git-hash": "e8830e9",
+        "clab-mgmt-net-bridge": "br-ede5b6949460",
+        "clab-node-group": "",
+        "clab-node-kind": "bridge",
+        "clab-node-lab-dir": "/home/sevval/Desktop/bitirme projesi/src/clab-bitirme-lab/switch1",
+        "clab-node-longname": "clab-bitirme-lab-switch1",
+        "clab-node-name": "switch1",
+        "clab-node-type": "",
+        "clab-owner": "sevval",
+        "clab-topo-file": "/home/sevval/Desktop/bitirme projesi/src/topoloji.yaml",
+        "containerlab": "bitirme-lab"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "endpoints": {
+        "a": {
+          "node": "log-server",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:b0:7b:e0",
+          "peer": "z"
+        },
+        "z": {
+          "node": "switch1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:2b:f1:9f",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "pc1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:71:19:20",
+          "peer": "z"
+        },
+        "z": {
+          "node": "switch1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:9b:48:05",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "pc2",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:f4:b0:bf",
+          "peer": "z"
+        },
+        "z": {
+          "node": "switch1",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:41:e5:ce",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "pc3",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:24:f7:22",
+          "peer": "z"
+        },
+        "z": {
+          "node": "switch1",
+          "interface": "eth4",
+          "mac": "aa:c1:ab:56:8f:f8",
+          "peer": "a"
+        }
+      }
+    }
+  ]
+}

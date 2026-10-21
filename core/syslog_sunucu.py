@@ -9,11 +9,26 @@ db_yolu = os.path.join(os.path.dirname(os.path.dirname(__file__)), "db", "verita
 def logu_veritabanina_yaz(ip_adresi, mesaj):
     baglanti = sqlite3.connect(db_yolu)
     imlec = baglanti.cursor()
-    # gelen logu tabloya ekler
+
+    # 1. Gelen logun IP adresi envanterde var mı kontrol
+    imlec.execute("SELECT durum FROM cihazlar WHERE ip_adresi = ?", (ip_adresi,))
+    cihaz = imlec.fetchone()
+
+    if cihaz is None:
+        # 2. Cihaz envanterde YOK! Güvenlik ihlali tespit edildi
+        # Cihazı 'yabanci' durumuyla ve MAC adresi bilinmiyor olarak kaydet
+        imlec.execute('''
+                      INSERT INTO cihazlar (mac_adresi, ip_adresi, durum)
+                      VALUES (?, ?, ?)
+                      ''', ('BILINMIYOR (KAYITSIZ)', ip_adresi, 'yabanci'))
+        print(f"\n[🚨 ALARM] GÜVENLİK UYARISI: Kayıtsız cihaz tespit edildi! (IP: {ip_adresi})")
+
+    # 3. Gelen logu tabloya ekle
     imlec.execute('''
                   INSERT INTO loglar (kaynak_ip, mesaj)
                   VALUES (?, ?)
                   ''', (ip_adresi, mesaj))
+
     baglanti.commit()
     baglanti.close()
 

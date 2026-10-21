@@ -1,22 +1,32 @@
 import sqlite3
 import os
-from scapy.all import ARP, Ether, srp
+from scapy.layers.l2 import ARP, Ether
+from scapy.sendrecv import srp
 
 # Veritabanı dosyası
 db_yolu = os.path.join(os.path.dirname(os.path.dirname(__file__)), "db", "veritabani.sqlite")
 
 
-def aktif_cihazlari_bul(ip_blogu="10.109.246.0/24"):
+def aktif_cihazlari_bul(ip_blogu="172.20.20.0/24"):
     print(f"[*] Hedef ag taraniyor: {ip_blogu}")
+
     paket = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=ip_blogu)
-    cevaplar, _ = srp(paket, timeout=2, verbose=False)
+
+    # Paketleri Containerlab sanal kartından (br-ede5b6949460) göndermek için
+    sonuc = srp(paket, timeout=3, verbose=False, iface="br-ede5b6949460")
 
     cihaz_listesi = []
-    for _, gelen_paket in cevaplar:
-        cihaz_listesi.append({
-            "ip_adresi": gelen_paket.psrc,
-            "mac_adresi": gelen_paket.hwsrc
-        })
+
+    # Güvenlik kontrolü: Scapy'den dönen veri boş gelirse
+    if sonuc is not None and len(sonuc) == 2:
+        cevaplar = sonuc[0]  # Yanıt veren cihazların listesi
+        if cevaplar is not None:
+            for _, gelen_paket in cevaplar:
+                cihaz_listesi.append({
+                    "ip_adresi": gelen_paket.psrc,
+                    "mac_adresi": gelen_paket.hwsrc
+                })
+
     return cihaz_listesi
 
 
@@ -38,9 +48,10 @@ def veritabanina_kaydet(cihazlar):
 
 
 if __name__ == "__main__":
-    ag_envanteri = aktif_cihazlari_bul()
+    # Containerlab IP bloğu -> ana fonksiyon bloğu
+    ag_envanteri = aktif_cihazlari_bul("172.20.20.0/24")
 
     if ag_envanteri:
         veritabanina_kaydet(ag_envanteri)
     else:
-        print("[-] Ağda cihaz bulunamadı.")
+        print("[-] Ağda cihaz bulunamadı veya bağlantı kurulamadı.")

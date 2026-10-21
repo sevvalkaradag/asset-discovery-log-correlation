@@ -1,0 +1,24 @@
+name: bitirme-lab
+
+topology:
+  nodes:
+    switch1:
+      kind: bridge
+    log-server:
+      kind: linux
+      image: alpine:latest
+    pc1:
+      kind: linux
+      image: alpine:latest
+    pc2:
+      kind: linux
+      image: alpine:latest
+    pc3:
+      kind: linux
+      image: alpine:latest
+
+  links:
+    - endpoints: ["log-server:eth1", "switch1:eth1"]
+    - endpoints: ["pc1:eth1", "switch1:eth2"]
+    - endpoints: ["pc2:eth1", "switch1:eth3"]
+    - endpoints: ["pc3:eth1", "switch1:eth4"]
