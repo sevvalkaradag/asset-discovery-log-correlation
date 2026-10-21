@@ -3,10 +3,10 @@
 .idea/
 __pycache__/
 
-# Yerel veritabanı dosyası (Kişisel IP/MAC verileri internete açılmasın, db_kurulum.py zaten bunu sıfırdan oluşturuyor)
+# Python derleme dosyaları
+*.pyc
+
+# Yerel veritabanı dosyaları (Kişisel IP/MAC verileri internete açılmasın)
 *.sqlite
 *.sqlite3
-.venv/
-__pycache__/
 db/*.sqlite
-*.pyc
