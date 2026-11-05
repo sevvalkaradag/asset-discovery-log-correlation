@@ -1,26 +1,46 @@
 ---
-switch1:
-    username: 
-    password: 
-    platform: bridge
-    hostname: 
 log-server:
     username: 
     password: 
     platform: linux
-    hostname: 172.20.20.2
+    hostname: 172.20.20.7
 pc1:
     username: 
     password: 
     platform: linux
-    hostname: 172.20.20.3
+    hostname: 172.20.20.2
 pc2:
     username: 
     password: 
     platform: linux
-    hostname: 172.20.20.4
+    hostname: 172.20.20.3
 pc3:
     username: 
     password: 
     platform: linux
+    hostname: 172.20.20.8
+pc4:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.9
+pc5:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.4
+pc6:
+    username: 
+    password: 
+    platform: linux
     hostname: 172.20.20.5
+switch1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.6
+switch2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.10

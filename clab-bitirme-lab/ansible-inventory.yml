@@ -5,17 +5,23 @@ all:
     # module does not attempt using any global http proxy.
     ansible_httpapi_use_proxy: false
   children:
-    bridge:
-      hosts:
-        clab-bitirme-lab-switch1:
-          ansible_host: 
     linux:
       hosts:
         clab-bitirme-lab-log-server:
-          ansible_host: 172.20.20.2
+          ansible_host: 172.20.20.7
         clab-bitirme-lab-pc1:
-          ansible_host: 172.20.20.3
+          ansible_host: 172.20.20.2
         clab-bitirme-lab-pc2:
-          ansible_host: 172.20.20.4
+          ansible_host: 172.20.20.3
         clab-bitirme-lab-pc3:
+          ansible_host: 172.20.20.8
+        clab-bitirme-lab-pc4:
+          ansible_host: 172.20.20.9
+        clab-bitirme-lab-pc5:
+          ansible_host: 172.20.20.4
+        clab-bitirme-lab-pc6:
           ansible_host: 172.20.20.5
+        clab-bitirme-lab-switch1:
+          ansible_host: 172.20.20.6
+        clab-bitirme-lab-switch2:
+          ansible_host: 172.20.20.10

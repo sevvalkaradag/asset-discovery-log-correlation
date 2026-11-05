@@ -2,23 +2,111 @@ name: bitirme-lab
 
 topology:
   nodes:
+    # --- 2 ADET FRR SWITCH ---
     switch1:
-      kind: bridge
+      kind: linux
+      image: quay.io/frrouting/frr:10.1.0
+      exec:
+        # VLAN destekli Switch (Bridge) kurulumu
+        - ip link add name br0 type bridge vlan_filtering 1
+        - ip link set dev br0 up
+        - ip link set dev eth1 master br0
+        - ip link set dev eth2 master br0
+        - ip link set dev eth3 master br0
+        - ip link set dev eth4 master br0
+        - ip link set dev eth5 master br0
+        # Port VLAN ayarları (eth5: switch2 ile Trunk bağlantı)
+        - bridge vlan add vid 10 dev eth1 pvid untagged
+        - bridge vlan add vid 20 dev eth1
+        - bridge vlan add vid 10 dev eth2 pvid untagged
+        - bridge vlan add vid 10 dev eth3 pvid untagged
+        - bridge vlan add vid 20 dev eth4 pvid untagged
+        - bridge vlan add vid 10 dev eth5
+        - bridge vlan add vid 20 dev eth5
+        # Inter-VLAN Routing için Gateway IP'leri
+        - bridge vlan add vid 10 dev br0 self
+        - bridge vlan add vid 20 dev br0 self
+        - ip link add link br0 name vlan10 type vlan id 10
+        - ip link add link br0 name vlan20 type vlan id 20
+        - ip addr add 10.10.10.1/24 dev vlan10
+        - ip addr add 10.10.20.1/24 dev vlan20
+        - ip link set vlan10 up
+        - ip link set vlan20 up
+
+    switch2:
+      kind: linux
+      image: quay.io/frrouting/frr:10.1.0
+      exec:
+        - ip link add name br0 type bridge vlan_filtering 1
+        - ip link set dev br0 up
+        - ip link set dev eth1 master br0
+        - ip link set dev eth2 master br0
+        - ip link set dev eth3 master br0
+        - ip link set dev eth4 master br0
+        # Port VLAN ayarları (eth1: switch1 ile Trunk bağlantı)
+        - bridge vlan add vid 10 dev eth1
+        - bridge vlan add vid 20 dev eth1
+        - bridge vlan add vid 10 dev eth2 pvid untagged
+        - bridge vlan add vid 20 dev eth3 pvid untagged
+        - bridge vlan add vid 20 dev eth4 pvid untagged
+
+    # --- MERKEZİ LOG VE KEŞİF SUNUCUSU ---
     log-server:
       kind: linux
       image: alpine:latest
+      exec:
+        - ip addr add 10.10.10.100/24 dev eth1
+        - ip route replace default via 10.10.10.1
+
+    # --- 6 ADET UÇ CİHAZ (VLAN 10 ve VLAN 20) ---
     pc1:
       kind: linux
       image: alpine:latest
+      exec:
+        - ip addr add 10.10.10.11/24 dev eth1
+        - ip route replace default via 10.10.10.1
     pc2:
       kind: linux
       image: alpine:latest
+      exec:
+        - ip addr add 10.10.10.12/24 dev eth1
+        - ip route replace default via 10.10.10.1
     pc3:
       kind: linux
       image: alpine:latest
+      exec:
+        - ip addr add 10.10.20.13/24 dev eth1
+        - ip route replace default via 10.10.20.1
+    pc4:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.10.10.14/24 dev eth1
+        - ip route replace default via 10.10.10.1
+    pc5:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.10.20.15/24 dev eth1
+        - ip route replace default via 10.10.20.1
+    pc6:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.10.20.16/24 dev eth1
+        - ip route replace default via 10.10.20.1
 
   links:
+    # Switch1 bağlantıları (log-server, pc1, pc2, pc3)
     - endpoints: ["log-server:eth1", "switch1:eth1"]
     - endpoints: ["pc1:eth1", "switch1:eth2"]
     - endpoints: ["pc2:eth1", "switch1:eth3"]
     - endpoints: ["pc3:eth1", "switch1:eth4"]
+
+    # İki FRR Switch arasındaki Trunk bağlantı
+    - endpoints: ["switch1:eth5", "switch2:eth1"]
+
+    # Switch2 bağlantıları (pc4, pc5, pc6)
+    - endpoints: ["pc4:eth1", "switch2:eth2"]
+    - endpoints: ["pc5:eth1", "switch2:eth3"]
+    - endpoints: ["pc6:eth1", "switch2:eth4"]
